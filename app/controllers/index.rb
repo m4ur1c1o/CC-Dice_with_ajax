@@ -17,5 +17,10 @@ post '/rolls' do
   @roll = params[:value] ? Roll.create({ value: params[:value].to_i }) : Roll.create
 	puts "Esto es after @roll: #{@roll.value}"
   # erb :index  # TIP: Que esta haciendo esto y que debe hacer diferente. 
-  erb :_die_roll, layout: false
+  
+  if request.xhr?
+  	erb :_die_roll, layout: false
+  else
+  	erb :index
+  end
 end
